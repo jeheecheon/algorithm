@@ -22,6 +22,8 @@ bool solve(int64 mid)
 
 int main(void)
 {
+    cin.tie(0)->tie(0)->sync_with_stdio(0);
+    
     cin >> N >> M;
     for (int i = 0; i < N; ++i)
         cin >> logs[i];
