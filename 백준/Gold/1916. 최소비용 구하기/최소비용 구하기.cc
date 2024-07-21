@@ -8,12 +8,12 @@ int main()
 {
     cin.tie(0)->tie(0)->sync_with_stdio(0);
     
-    int N, M; // 도시 개수, 버스 개수
+    int N, M;
     cin >> N >> M;
 
     vector<vector<pair<int, int>>> busses(N + 1);
     for (int i = 0; i < M; ++i) {
-        int st, end, val; // 출발 도시, 도착 도시, 비용
+        int st, end, val;
         cin >> st >> end >> val;
         busses[st].emplace_back(end, val);
     }
@@ -22,7 +22,7 @@ int main()
     cin >> st >> dest;
     vector<int> dist(N + 1, 0x3f3f3f3f);
 
-    priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> PQ;
+    priority_queue<pair<int, int>, vector<pair<int, int>>, less<pair<int, int>>> PQ;
     PQ.push({0, st});
     dist[st] = 0;
     while (!PQ.empty()) {
