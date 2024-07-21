@@ -22,11 +22,11 @@ int main()
     cin >> st >> dest;
     vector<int> dist(N + 1, 0x3f3f3f3f);
 
-    priority_queue<pair<int, int>, vector<pair<int, int>>, less<pair<int, int>>> PQ;
+    queue<pair<int, int>> PQ;
     PQ.push({0, st});
     dist[st] = 0;
     while (!PQ.empty()) {
-        auto [accWeight, curBus] = PQ.top();
+        auto [accWeight, curBus] = PQ.front();
         PQ.pop();
 
         if (accWeight > dist[curBus])
