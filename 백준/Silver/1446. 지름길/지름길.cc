@@ -21,7 +21,7 @@ int main()
         roads[st].emplace_back(end, len);
     }
 
-    priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> PQ;
+    priority_queue<pair<int, int>, vector<pair<int, int>>, less<pair<int, int>>> PQ;
     PQ.push({ 0, 0 });
     dist[0] = 0;
 
