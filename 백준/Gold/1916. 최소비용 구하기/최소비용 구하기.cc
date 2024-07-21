@@ -6,6 +6,8 @@ using namespace std;
 
 int main()
 {
+    cin.tie(0)->tie(0)->sync_with_stdio(0);
+    
     int N, M; // 도시 개수, 버스 개수
     cin >> N >> M;
 
