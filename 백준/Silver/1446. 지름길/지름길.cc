@@ -4,13 +4,6 @@
 
 using namespace std;
 
-struct myComp {
-    bool operator()(pair<int, int> f, pair<int, int> s)
-    {
-        return f > s;
-    }
-};
-
 int main()
 {
     int N, D;
@@ -28,7 +21,7 @@ int main()
         roads[st].emplace_back(end, len);
     }
 
-    priority_queue<pair<int, int>, vector<pair<int, int>>, myComp> PQ;
+    priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> PQ;
     PQ.push({ 0, 0 });
     dist[0] = 0;
 
