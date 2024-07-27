@@ -8,6 +8,8 @@ pair<int, int> dirs[] = { { 0, 1 }, { 1, 0 }, { -1, 0 }, { 0, -1 } };
 
 int main(void)
 {
+    cin.tie(0)->tie(0)->sync_with_stdio(0);
+    
     int N, M;
     cin >> N >> M;
     string board[N];
