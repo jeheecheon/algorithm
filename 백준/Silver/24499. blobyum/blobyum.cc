@@ -1,30 +1,45 @@
-#include <algorithm>
 #include <iostream>
+#include <queue>
+#include <vector>
 
 using namespace std;
-int N, K;
-int arr[100001];
-int acc[100001];
-int main(void)
+
+int main()
 {
-    cin.tie(0)->tie(0)->sync_with_stdio(0);
+    cin.tie(0)->sync_with_stdio(0);
 
-    cin >> N >> K;
-    for (int i = 0; i < N; ++i)
+    int n, k;
+    cin >> n >> k;
+    int arr[n];
+
+    // input
+    for (int i = 0; i < n; i++) {
         cin >> arr[i];
-
-    for (int i = 0; i < K; ++i) {
-        acc[0] += arr[i];
     }
 
-    int st = 1, en = K;
-    for (int i = 1; i < N; ++i) {
-        acc[i] = acc[i - 1] - arr[st - 1] + arr[en];
-        ++st, ++en;
-        if (en >= N) {
-            en = en % N;
-        }
+    // 첫 번째 구간 계산
+    int ans;
+    int sum = 0;
+    for (int i = 0; i < k; i++) {
+        sum += arr[i];
+    }
+    ans = sum;
+
+    // 구간별 비교
+    int st = 1;
+    int ed = k % n;
+
+    while (st < n) {
+        sum -= arr[st - 1];
+        sum += arr[ed];
+
+        ans = max(ans, sum);
+
+        st++;
+        ed++;
+        if (ed >= n)
+            ed = 0;
     }
 
-    cout << *max_element(&acc[0], &acc[N]);
+    cout << ans;
 }
