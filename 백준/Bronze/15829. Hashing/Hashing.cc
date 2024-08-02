@@ -1,5 +1,5 @@
-#include <iostream>
 #include <cmath>
+#include <iostream>
 
 using namespace std;
 
@@ -12,10 +12,12 @@ int main()
     cin >> N >> str;
 
     long long sum = 0;
+    long long pow_mult = 1;
     for (int i = 0; i < N; ++i) {
-        sum += (str[i] - 'a' + 1) * pow(31, i);
-        sum %= 1234567891;
+        sum = (sum + (str[i] - 'a' + 1) * pow_mult) % 1234567891;
+        pow_mult = (pow_mult * 31) % 1234567891;
     }
+
     cout << sum;
     return 0;
 }
