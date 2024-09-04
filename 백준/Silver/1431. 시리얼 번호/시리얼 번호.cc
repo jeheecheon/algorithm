@@ -1,36 +1,50 @@
+// baekjoon 1431
+
 #include <algorithm>
 #include <iostream>
-#include <cstring>
+#include <string>
+#include <vector>
 
 using namespace std;
 
-int main(void)
+int isAlphabet(char ch)
+{
+    return (ch >= 'A' && ch <= 'Z');
+}
+
+int main()
 {
     int n;
     cin >> n;
-    string serials[n];
-    for (string& s : serials)
-        cin >> s;
+    vector<string> p(n);
+    for (int i = 0; i < n; i++)
+        cin >> p[i];
 
-    sort(&serials[0], &serials[n], [](string first, string second) {
-        if (first.length() == second.length()) {
-            int firVal = 0, secVal = 0;
-            for (int i = 0; i < first.length(); ++i) {
-                if (first[i] >= '0' && first[i] <= '9')
-                    firVal += first[i] - '0';
-                if (second[i] >= '0' && second[i] <= '9')
-                    secVal += second[i] - '0';
-            }
-            if (firVal == secVal) {
-                return strcmp(first.c_str(), second.c_str()) <= 0 ? true : false;
-            } else {
-                return firVal <= secVal;
-            }
-        } else {
-            return first.length() < second.length();
+    sort(p.begin(), p.end(), [](string a, string b) {
+        if (a.length() != b.length()) {
+            return a.length() <= b.length();
         }
+
+        int l = a.length();
+
+        int ASum = 0, BSum = 0;
+        for (int i = 0; i < l; ++i) {
+            if (!isAlphabet(a[i])) {
+                ASum += a[i] - '0';
+            }
+
+            if (!isAlphabet(b[i])) {
+                BSum += b[i] - '0';
+            }
+        }
+
+        if (ASum != BSum) {
+            return ASum <= BSum;
+        }
+
+        return a <= b;
     });
 
-    for (auto s : serials)
+    for (string& s : p)
         cout << s << '\n';
 }
