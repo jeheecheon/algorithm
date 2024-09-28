@@ -1,32 +1,30 @@
-#include <iostream>
-#include <unordered_map>
+// baekjoon 9375
 
+#include <bits/stdc++.h>
+
+#define endl '\n'
 using namespace std;
 
-int T, N;
-
-int main(void)
+int main()
 {
     cin.tie(0)->tie(0)->sync_with_stdio(0);
+
+    int T, N;
     cin >> T;
-    while (T--)
-    {
+    while (T--) {
         cin >> N;
-        unordered_map<string, int> mymap;
-        while (N--)
-        {
-            string category;
-            cin >> category >> category;
-            mymap[category]++;
+        map<string, int> M;
+        string str;
+
+        for (int i = 0; i < N; ++i) {
+            cin >> str >> str;
+            ++M[str];
         }
 
-        int result = 1;
-        for (auto [k, v] : mymap)
-            result *= (v + 1);
-            
-        result -= 1;
-
-        cout << result << '\n';
+        int ans = 1;
+        for (auto [k, v] : M) 
+            ans *= v + 1;
+        
+        cout << ans - 1 << endl;
     }
-    return 0;
 }
