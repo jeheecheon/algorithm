@@ -2,16 +2,9 @@
 
 #include <bits/stdc++.h>
 
-using namespace std;
-using ll = long long;
-using point = pair<int, int>;
-
-#define X first
-#define Y second
-
-using namespace std;
-
 #define endl '\n'
+
+using namespace std;
 
 int main()
 {
@@ -24,10 +17,8 @@ int main()
         cin >> arr[i];
         if (arr[i] < arr[i - 1])
             pre[i] = 1;
-    }
-
-    for (int i = 1; i <= N; ++i)
         pre[i] += pre[i - 1];
+    }        
 
     cin >> T;
     int a, b;
