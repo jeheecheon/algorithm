@@ -1,49 +1,53 @@
-#include <algorithm>
-#include <iostream>
+// baekjoon 1189
+
+#include <bits/stdc++.h>
+
+#define endl '\n'
+
 using namespace std;
+using point = pair<int, int>;
+using ll = long long;
+
+vector<point> dirs = {
+    { 0, 1 }, { 1, 0 }, { -1, 0 }, { 0, -1 }
+};
 
 string board[5];
+bool vis[5][5];
 int R, C, K;
-pair<int, int> dirs[4] = { { 0, 1 }, { 1, 0 }, { -1, 0 }, { 0, -1 } };
-int dist[5][5];
-int cnt = 0;
+int ans;
 
-void solve(int x, int y)
+void solve(int x, int y, int k)
 {
-    if (dist[x][y] > K) {
-        return;
-    }
-    if (x == 0 && y == C - 1) {
-        if (dist[x][y] == K) 
-            ++cnt;
+    if (k == K) {
+        if (x == 0 && y == C - 1)
+            ++ans;
         return;
     }
 
-    for (auto [dirX, dirY] : dirs) {
-        auto [nextX, nextY] = pair { dirX + x, dirY + y };
+    for (auto [dx, dy] : dirs) {
+        auto [nx, ny] = point { x + dx, y + dy };
 
-        if (nextX < 0 || nextX >= R || nextY < 0 || nextY >= C)
+        if (nx < 0 || nx >= R || ny < 0 || ny >= C)
             continue;
-        if (dist[nextX][nextY] >= 0 || board[nextX][nextY] == 'T')
+        
+        if (vis[nx][ny] || board[nx][ny] == 'T')
             continue;
-
-        dist[nextX][nextY] = dist[x][y] + 1;
-        solve(nextX, nextY);
-        dist[nextX][nextY] = -1;
+        
+        vis[nx][ny] = true;
+        solve(nx, ny, k + 1);
+        vis[nx][ny] = false;
     }
 }
 
 int main()
 {
     cin.tie(0)->tie(0)->sync_with_stdio(0);
-
     cin >> R >> C >> K;
     for (int i = 0; i < R; ++i)
         cin >> board[i];
-    fill(&dist[0][0], &dist[0][0] + 25, -1);
-    dist[R - 1][0] = 1;
 
-    solve(R - 1, 0);
-
-    cout << cnt;
+    vis[R - 1][0] = true;
+    solve(R - 1, 0, 1);
+    cout << ans;
 }
