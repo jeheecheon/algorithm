@@ -4,7 +4,7 @@
 const filePath = process.platform === "linux" ? "/dev/stdin" : "./src/input.txt";
 const input = require("fs").readFileSync(filePath).toString().trim().split("\n");
 
-let T = +input.shift();
+let T = +input[0];
 
 /**
  * Solution
@@ -12,8 +12,7 @@ let T = +input.shift();
 let ans = [];
 
 for (let i = 0; i < T; ++i) {
-    input.shift();
-    const arr = input.shift().split(" ").map(Number);
+    const arr = input[2 + 2 * i].split(" ").map(Number);
 
     let profit = 0;
     let maxi = 0;
