@@ -4,36 +4,37 @@
 const filePath = process.platform === "linux" ? "/dev/stdin" : "./src/input.txt";
 const input = require("fs").readFileSync(filePath).toString().trim().split("\n");
 
-const [N, M] = input[0].split(" ").map(Number);
-const arr = input[1].split(" ").map(Number);
+let [N, M] = input[0].split(" ").map(Number);
+let arr = input[1].split(" ").map(Number);
 
 /**
  * Solution
  */
 arr.sort((a, b) => a - b);
 
-let ans = "";
-const vis = Array(8).fill(false);
-const picked = [1];
-const solve = (k) => {
-    if (k == M) {
-        ans += picked.slice(1).join(" ") + "\n";
+const used = Array(N).fill(false);
+const selected = [];
+let ans = [];
+
+solve(0);
+function solve(k) {
+    if (k === M) {
+        ans.push(selected.join(" "));
         return;
     }
 
     for (let i = 0; i < N; ++i) {
-        if (vis[i])
+        if (used[i])
             continue;
 
-        vis[i] = true;
-        picked.push(arr[i]);
-
+        used[i] = true;
+        selected.push(arr[i]);
+        
         solve(k + 1);
 
-        vis[i] = false;
-        picked.pop();
+        used[i] = false;
+        selected.length -= 1;
     }
-};
+}
 
-solve(0);
-console.log(ans);
+console.log(ans.join("\n"));
