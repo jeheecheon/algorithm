@@ -12,7 +12,7 @@ const arr = Array(N)
 /**
  * Solution
  */
-let st = 0,
+let st = 1,
     end = 0x7fffffff;
 
 function solve(len) {
@@ -24,16 +24,13 @@ function solve(len) {
     return cnt >= M;
 }
 
-let ans = -1;
-while (st <= end) {
-    const mid = Math.trunc((st + end) / 2);
+while (st < end) {
+    const mid = Math.trunc((st + end + 1) / 2);
 
-    if (solve(mid)) {
-        ans = mid;
-        st = mid + 1;
-    }
+    if (solve(mid)) 
+        st = mid;
     else 
         end = mid - 1;
 }
 
-console.log(ans);
+console.log(st);
