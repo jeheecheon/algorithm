@@ -20,8 +20,8 @@ for (let c = 0; c < arr.length; ++c) {
         const b = arr[c] - arr[a];
 
         let st = 0, end = arr.length - 1;
-
         let found = false;
+
         while (st <= end) {
             const mid = Math.floor((st + end) / 2);
             if (arr[mid] === b) {
@@ -29,16 +29,14 @@ for (let c = 0; c < arr.length; ++c) {
                     cnt++;
                     found = true;
                     break;
-                } else if (mid === c) {
-                    st = mid + 1;
-                } else {
+                } else if (mid === c) 
                     end = mid - 1;
-                }
-            } else if (arr[mid] < b) {
+                else 
+                    st = mid + 1;
+            } else if (arr[mid] < b) 
                 st = mid + 1;
-            } else {
+            else 
                 end = mid - 1;
-            }
         }
 
         if (found)
